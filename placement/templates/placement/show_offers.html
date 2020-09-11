@@ -1,0 +1,42 @@
+{% extends "placement/header.html" %}
+
+{% block content %}
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 2px solid #FFFFFF;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+
+<p>&nbsp;</p>
+<h2>Job Offers</h2>
+<article class="media content-section">
+    <div class="container info-boxes pt100 pb100">
+        <table>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Placed In</th>
+        </tr>
+    {% for offer in offers %}
+            <tr>
+                <th>{{offer.first_name}}</th>
+                <th>{{offer.last_name}}</th>
+                <th>{{offer.placed_in}}</th>
+            </tr>
+
+    {% endfor %}
+    </div>
+</article>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "placement/header.html" %}
+
+{% block content %}
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 2px solid #FFFFFF;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+
+<p>&nbsp;</p>
+<h2>Job Profiles</h2>
+<article class="media content-section">
+    <div class="container info-boxes pt100 pb100">
+        <table>
+        <tr>
+            <th>Company</th>
+            <th>Job Profile</th>
+            <th>Location</th>
+            <th>Category</th>
+        </tr>
+    {% for company in companies %}
+            <tr>
+                <th><a href="{% url 'show_description' company.id %}">{{company.company_name}}</a></th>
+                <th>{{company.job_profile}}</th>
+                <th>{{company.company_location}}</th>
+                <th>{{company.company_category}}</th>
+            </tr>
+
+    {% endfor %}
+    </div>
+</article>
+{% endblock %}
