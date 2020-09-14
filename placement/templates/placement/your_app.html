@@ -1,0 +1,50 @@
+{% extends "placement/header.html" %}
+
+{% block content %}
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 2px solid #FFFFFF;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+<script>
+function myFunction(str1) {
+  var str2 = "Applied";
+  var n = str1.localeCompare(str2);
+    return n;
+}
+</script>
+<p>&nbsp;</p>
+<h2>Your Applications</h2>
+<article class="media content-section">
+    <div class="container info-boxes pt100 pb100">
+        <table>
+        <tr>
+            <th style="color: #fff; background: #228B22;">Companies</th>
+            <th style="color: #fff; background: #228B22;">Status</th>
+        </tr>
+    {% for app in apps %}
+            <tr>
+                <th>{{app.applied_in}}</th>
+                {% ifequal app.status "Applied" %}
+                    <th style="color: #008000;">{{app.status}}</th>
+                    {% else %}
+                        <th style="color: #000000;">{{app.status}}</th>
+                {% endifequal %}
+            </tr>
+
+    {% endfor %}
+    </div>
+</article>
+{% endblock %}

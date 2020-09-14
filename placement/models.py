@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
+import ast
 # Create your models here.
 class company(models.Model):
     company_name = models.CharField(max_length=100)
@@ -27,3 +28,14 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('post-detail', kwargs={'pk': self.pk})
+
+class application(models.Model):
+    name = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
+    applied_in = models.ForeignKey(company, null=True, blank=True, on_delete=models.CASCADE)
+    status = models.CharField(default='Applied', max_length=50)
+
+    class Meta:
+        unique_together = (("name", "applied_in"),)
+
+    def __str__(self):
+        return f'{self.name.username} Application'

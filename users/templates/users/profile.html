@@ -1,13 +1,20 @@
 {% extends "placement/header.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
+<style>
+	.stu {
+  	padding-bottom: 10px;
+	}
+</style>
     <div class="content-section">
       <div class="media">
         <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
         <div class="media-body">
           <h2 class="account-heading">{{ user.username }}</h2>
           <p class="text-secondary">{{ user.email }}</p>
-            <th><a href="{% url 'delete_user' user.id %}">Delete Account</a></th>
+            <div class="stu"><a onclick="myFunction()" href="" id="goto">Delete Account</a></div>
+
+            <h6><a href="{% url 'your_app'%}" >Your Applications</a></h6>
         </div>
       </div>
       <form method="POST" enctype="multipart/form-data">
@@ -23,4 +30,12 @@
           </div>
       </form>
     </div>
+<script type="text/javascript">
+function myFunction() {
+  var temp = confirm("Please confirm to delete your account!");
+  if(temp){
+    document.getElementById("goto").href="{% url 'delete_user' user.id %}";
+  }
+}
+</script>
 {% endblock content %}

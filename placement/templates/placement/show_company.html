@@ -21,6 +21,9 @@ tr:nth-child(even) {
 
 <p>&nbsp;</p>
 <h2>Job Profiles</h2>
+{% if user.is_authenticated %}
+<a href="{% url 'your_app'%}" >Click here to see your applied Applications</a>
+{% endif %}
 <article class="media content-section">
     <div class="container info-boxes pt100 pb100">
         <table>

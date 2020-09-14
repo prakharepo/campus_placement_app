@@ -44,10 +44,10 @@ function myFunction() {
           <div class="media-body">
               <h3>{{ companies.job_profile }}</h3>
               <h4>{{ companies.company_name }}</h4>
-              <h5>Apply for this job profile</h5>
 <!--              <form action="#">-->
-              <input id="demo" type="submit" class="btn btn-outline-info" onclick="myFunction()" value="Apply">
+<!--              <input id="demo" type="submit" class="btn btn-outline-info" onclick="myFunction()" value="Apply">-->
 <!--              </form>-->
+              <h5 style="color:blue;"><a href="{% url 'apply_job' companies.id %}">Apply for this job profile</a></h5>
           </div>
     </article>
 {% endblock %}
