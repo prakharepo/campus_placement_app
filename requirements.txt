@@ -8,7 +8,6 @@ image==1.5.32
 isort==5.5.1
 lazy-object-proxy==1.4.3
 mccabe==0.6.1
-mysqlclient==2.0.1
 Pillow==7.2.0
 pylint==2.6.0
 pylint-django==2.3.0
