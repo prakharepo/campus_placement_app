@@ -5,6 +5,6 @@
 ## To Run the code
 Setup Django https://www.digitalocean.com/community/tutorials/how-to-install-django-and-set-up-a-development-environment-on-ubuntu-16-04
 ### Additional Requirements -
-Listed in requirements.txt
+Listed in requirements.txt<br/>
 pip3 install -r requirements.txt
 
