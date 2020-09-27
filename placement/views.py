@@ -29,11 +29,7 @@ def apply_job(request, company_id):
     current_user = request.user
     print(current_user)
     comp = company.objects.get(pk=company_id)
-    # comp = comp.company_name
-    # entry = application.objects.get(name=current_user)
-    # entry.aField += ", "
-    # entry.aField += comp.company_name
-    # entry.save()
+
     try:
         entry = application(name=current_user, applied_in=comp)
         entry.save()

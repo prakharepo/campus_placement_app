@@ -67,13 +67,11 @@
 </style>
 </head>
 <body>
-<!--    <h2>hey i am header</h2>-->
 <header class="site-header">
 <div class="topnav">
     <a class="active" href="/index/">Home</a>
     <a href="/announcement/">Announcements</a>
     <a href="/show_company/">Job Profiles</a>
-<!--    <a style="float:right" href="/index/"><img src="/static/placement/logo.png" width="20" height="20" alt="" loading="lazy"></a>-->
     {% if user.is_authenticated %}
         <a href="{% url 'show_offers' %}">Job Offers</a>
         <a style="float:right" href="{% url 'logout' %}">Logout</a>
