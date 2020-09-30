@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     url(r'^show_offers/', user_views.show_users, name='show_offers'),
     url(r'^delete_user/(?P<username>[\w|\W.-]+)/$', user_views.delete_user, name='delete_user'),
+    url(r'^validate/(?P<field>[\w\-]+)/$', user_views.validate, name='validator'),
     url(r'^', include('placement.urls')),
 ]
 if settings.DEBUG:

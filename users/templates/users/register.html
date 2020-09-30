@@ -19,3 +19,126 @@
         </div>
     </div>
 {% endblock content %}
+{% block javascript %}
+<script>
+    $("#id_username").focusout(function (e) {
+        e.preventDefault();
+        var user_name = $(this).val();
+        if (user_name.length > 0) {
+            $.ajax({
+                type: 'GET',
+                url: "{% url 'validator' 'username' %}",
+                data: {"username": user_name},
+                success: function (response) {
+                    // if not valid user, alert the user
+                    if(!response["valid"]){
+                        var current_user_name = $("#id_username");
+                        //current_user_name.val("")
+                        //current_user_name.focus()
+                        //$()
+                        if ($('#error_1_id_username').length > 0){
+                            $("#id_username").addClass("is-invalid");
+                            $("#error_1_id_username").html("<strong>" + response["msg"] + "</strong>");
+                        } else {
+                            $("#id_username").parent().append('<p id="error_1_id_username" class="invalid-feedback"><strong>' + response["msg"] + '</strong></p>')
+                            $("#id_username").addClass("is-invalid");
+                        }
+                        //$("#email_label_edit").text("This username already exists");
+                    }
+                    else{
+                        $("#id_username").removeClass("is-invalid");
+                    }
+                },
+                error: function (response) {
+                    console.log(response)
+                }
+            })
+        }
+    })
+
+
+    $("#id_email").focusout(function (e){
+        e.preventDefault();
+        var user_email = $(this).val();
+        if (user_email.length > 0) {
+            $.ajax({
+                type: 'GET',
+                url: "{%url 'validator' 'email' %}",
+                data: {"email": user_email},
+                success: function (response) {
+                    if (!response["valid"]){
+                        var curr_email = $("#id_email");
+                        //curr_email.focus()
+                        //$()
+                         if ($('#error_2_id_email').length > 0){
+                            $("#id_email").addClass("is-invalid");
+                            $("#error_2_id_email").html("<strong>" + response["msg"] + "</strong>");
+                        } else {
+                            $("#id_email").parent().append('<p id="error_2_id_email" class="invalid-feedback"><strong>' + response["msg"] + '</strong></p>')
+                            $("#id_email").addClass("is-invalid");
+                        }
+                    }
+                    else {
+                        $("#id_email").removeClass("is-invalid");
+                    }
+                },
+                error: function (response) {
+                    console.log(response)
+                }
+            })
+        } 
+        
+    })
+
+    $("#id_password1").focusout(function (e){
+        e.preventDefault();
+        var user_pass = $(this).val();
+        if (user_pass.length > 0) {
+            $.ajax({
+                type: 'GET',
+                url: "{%url 'validator' 'password1' %}",
+                data: {"password1": user_pass},
+                success: function (response) {
+                    if (!response["valid"]){
+                        var curr_pass = $("#id_password1");
+                        //curr_email.focus()
+                        //$()
+                        for(i=0; i<response["msg"].length; i++){
+                            var error_id = 'error_password_'+ i.toString();
+                            if ($('#'+error_id).length > 0){
+                                $("#id_password1").addClass("is-invalid");
+                                $('#'+error_id).html("<strong>"+ response["msg"][i] +"</strong>");
+                            } else {
+                                $("#id_password1").parent().append('<p id="'+error_id+'" class="invalid-feedback"><strong>'+ response["msg"][i] +'</strong></p>');
+                                $("#id_password1").addClass("is-invalid");
+                            }
+                        }
+                    }
+                    else {
+                        $("#id_password1").removeClass("is-invalid");
+                    }
+                },
+                error: function (response) {
+                    console.log(response)
+                }
+            })
+        } 
+        
+    })
+
+    $('#id_password2').focusout( function (e) {
+        e.preventDefault();
+        if ($('#id_password1').val().length>0 && $('#id_password1').val() != $('#id_password2').val()) {
+            if ($('#error_1_id_password2').length > 0){
+                $("#id_password2").addClass("is-invalid");
+                $("#error_1_id_password2").html("<strong> The two password fields didn’t match. </strong>");
+            } else {
+                $("#id_password2").parent().append('<p id="error_1_id_password2" class="invalid-feedback"><strong> The two password fields didn’t match. </strong></p>');
+                $("#id_password2").addClass("is-invalid");
+            }
+        } else {
+            $("#id_password2").removeClass("is-invalid");
+        }
+    });
+</script>
+{% endblock javascript %}
