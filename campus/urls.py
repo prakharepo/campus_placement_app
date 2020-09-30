@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^show_offers/', user_views.show_users, name='show_offers'),
     url(r'^delete_user/(?P<username>[\w|\W.-]+)/$', user_views.delete_user, name='delete_user'),
     url(r'^validateLogin/', user_views.validate_login, name='validate_login'),
+    url(r'^validate/(?P<field>[\w\-]+)/$', user_views.validate, name='validator'),
     url(r'^', include('placement.urls')),
 ]
 if settings.DEBUG:

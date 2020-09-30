@@ -2,9 +2,13 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, ProfileViewForm
+from .forms import \
+    UserRegisterForm, UserUpdateForm, ProfileUpdateForm, ProfileViewForm
 from .models import Profile
 from django.http import JsonResponse
+from django.contrib.auth.password_validation import validate_password
+from django.core import exceptions
+
 
 @login_required
 def show_users(request):
@@ -15,6 +19,7 @@ def show_users(request):
             offer.append(all_users[i])
 
     return render(request, "placement/show_offers.html", {'offers': offer})
+
 
 def register(request):
     if request.method == 'POST':
@@ -55,6 +60,7 @@ def profile(request):
 
     return render(request, 'users/profile.html', context)
 
+
 @login_required
 def delete_user(request, username):
     context = {}
@@ -86,4 +92,72 @@ def validate_login(request):
                 "valid": False,
                 "msg": "This user do not exist. Please register."
             }, status=200)
-    return JsonResponse({}, status=400)
+          
+def is_username(s):
+    for i in s.lower():
+        if i not in 'abcdefghijklmnopqrstuvwxyz1234567890@.-_':
+            return False
+    return True
+
+
+def validate(request, field):
+    # request should be ajax and method should be GET.
+    if request.is_ajax and request.method == "GET":
+
+        if field == 'username':
+
+            user_name = request.GET.get("username", None)
+            # check for valid username.
+            if not is_username(user_name):
+                return JsonResponse({
+                    "valid": False,
+                    "msg": "Enter a valid username. This value may contain \
+                        only letters, numbers and @/./+/-/_ ."
+                }, status=200)
+
+            # check for the user name in the database.
+            if User.objects.filter(username=user_name).exists():
+                return JsonResponse({
+                    "valid": False,
+                    "msg": "A user with that username already exists."
+                }, status=200)
+
+            # if username not found, then user can be created.
+            else:
+                return JsonResponse({"valid": True}, status=200)
+
+        elif field == 'email':
+
+            user_email = request.GET.get("email", None)
+
+            # check for email in database
+            if User.objects.filter(email=user_email).exists():
+                return JsonResponse({
+                    "valid": False,
+                    "msg": "A user with that e-mail already exists."
+                }, status=200)
+            else:
+                return JsonResponse({"valid": True}, status=200)
+
+        elif field == 'password1':
+
+            user_password = request.GET.get("password1", None)
+
+            res = None
+
+            try:
+                validate_password(password=user_password, user=User)
+
+            except exceptions.ValidationError as e:
+                res = list(e.messages)
+
+            if res is not None:
+                return JsonResponse({
+                    "valid": False,
+                    "msg": res,
+                })
+            else:
+                return JsonResponse({"valid": True}, status=200)
+
+        else:
+            return JsonResponse({}, status=400)
