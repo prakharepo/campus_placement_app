@@ -34,14 +34,10 @@ function myFunction(str1) {
             <th style="color: #fff; background: #228B22;">Companies</th>
             <th style="color: #fff; background: #228B22;">Status</th>
         </tr>
-    {% for app in apps %}
+    {% for app in apps.applied_to.all %}
             <tr>
-                <th>{{app.applied_in}}</th>
-                {% ifequal app.status "Applied" %}
-                    <th style="color: #008000;">{{app.status}}</th>
-                    {% else %}
-                        <th style="color: #000000;">{{app.status}}</th>
-                {% endifequal %}
+                <th>{{app}}</th>
+                    <th style="color: #008000;">Applied</th>
             </tr>
 
     {% endfor %}
