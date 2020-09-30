@@ -78,6 +78,21 @@ def delete_user(request, username):
     return render(request, 'users/register.html', {'form': form})
 
 
+def validate_login(request):
+    # request should be ajax and method should be GET.
+    if request.is_ajax and request.method == "GET":
+        user_name = request.GET.get("username")
+        # check for the user name in the database.
+        if User.objects.filter(username=user_name).exists():
+            return JsonResponse({"valid": True}, status=200)
+
+        # if username not found, then user can't login.
+        else:
+            return JsonResponse({
+                "valid": False,
+                "msg": "This user do not exist. Please register."
+            }, status=200)
+          
 def is_username(s):
     for i in s.lower():
         if i not in 'abcdefghijklmnopqrstuvwxyz1234567890@.-_':
@@ -146,5 +161,3 @@ def validate(request, field):
 
         else:
             return JsonResponse({}, status=400)
-
-    return JsonResponse({}, status=400)
