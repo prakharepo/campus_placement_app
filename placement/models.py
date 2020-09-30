@@ -31,11 +31,7 @@ class Post(models.Model):
 
 class application(models.Model):
     name = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
-    applied_in = models.ForeignKey(company, null=True, blank=True, on_delete=models.CASCADE)
-    status = models.CharField(default='Applied', max_length=50)
-
-    class Meta:
-        unique_together = (("name", "applied_in"),)
+    applied_to = models.ManyToManyField(company, null=True, blank=True)
 
     def __str__(self):
         return f'{self.name.username} Application'
