@@ -1,4 +1,9 @@
 {% load static %}
+{% url 'show_offers' as job_offers_url %}
+{% url 'logout' as logout_url %}
+{% url 'profile' as profile_url %}
+{% url 'register' as register_url %}
+{% url 'login' as login_url %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -69,18 +74,19 @@
 <body>
 <header class="site-header">
 <div class="topnav">
-    <a class="active" href="/index/">Home</a>
-    <a href="/announcement/">Announcements</a>
-    <a href="/show_company/">Job Profiles</a>
+    <a  class="{% if request.path == '/' %} active {% endif%}" href="/">Home</a>
+    <a  class="{% if request.path == '/announcement/' %} active {% endif %}" href="/announcement/">Announcements</a>
+    <a  class="{% if request.path == '/show_company/' %} active {% endif %}" href="/show_company/">Job Profiles</a>
+<!--    <a style="float:right" href="/index/"><img src="/static/placement/logo.png" width="20" height="20" alt="" loading="lazy"></a>-->
     {% if user.is_authenticated %}
-        <a href="{% url 'show_offers' %}">Job Offers</a>
-        <a style="float:right" href="{% url 'logout' %}">Logout</a>
-        <a style="float:right" href="{% url 'profile' %}">My Profile</a>
-        <a style="float:right" href="/show_campus/">Show Campus</a>
+        <a style="float:right" href="{{ job_offers_url }}" class="{% if request.path == job_offers_url %} active {% endif%}">Job Offers</a>
+        <a style="float:right" href="{{ logout_url }}" class="{% if request.path == logout_url %} active {% endif%}">Logout</a>
+        <a style="float:right" href="{{ profile_url }}" class="{% if request.path == profile_url %} active {% endif%}">My Profile</a>
+        <a style="float:right" href="/show_campus/" class="{% if request.path == '/show_campus/' %} active {% endif%}">Show Campus</a>
     {% else %}
-        <a style="float:right" href="{% url 'register' %}">Register</a>
-        <a style="float:right" href="{% url 'login' %}">Login</a>
-        <a style="float:right" href="/show_campus/">Show Campus</a>
+        <a style="float:right" href="{{ register_url }}" class="{% if request.path == register_url %} active {% endif%}">Register</a>
+        <a style="float:right" href=" {{ login_url }}" class="{% if request.path == login_url %} active {% endif%}">Login</a>
+        <a style="float:right" href="/show_campus/" class="{% if request.path == '/show_campus/' %} active {% endif%}">Show Campus</a>
     {% endif %}
 </div>
 </header>
