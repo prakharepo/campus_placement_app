@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, ProfileViewForm
 from .models import Profile
+from django.http import JsonResponse
 
 @login_required
 def show_users(request):
@@ -69,3 +70,20 @@ def delete_user(request, username):
 
     form = UserRegisterForm()
     return render(request, 'users/register.html', {'form': form})
+
+
+def validate_login(request):
+    # request should be ajax and method should be GET.
+    if request.is_ajax and request.method == "GET":
+        user_name = request.GET.get("username")
+        # check for the user name in the database.
+        if User.objects.filter(username=user_name).exists():
+            return JsonResponse({"valid": True}, status=200)
+
+        # if username not found, then user can't login.
+        else:
+            return JsonResponse({
+                "valid": False,
+                "msg": "This user do not exist. Please register."
+            }, status=200)
+    return JsonResponse({}, status=400)
