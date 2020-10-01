@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import company, Post, application
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -13,7 +13,20 @@ def show_campus(request):
 
 def show_company(request):
     all_companies = company.objects.all()
-    return render(request, "placement/show_company.html", {'companies': all_companies})
+    if request.user.is_authenticated:
+        try:
+            entry = application.objects.get(name=request.user)
+        except ObjectDoesNotExist:
+            entry = application(name=request.user)
+            entry.save()
+        applied_applications = entry.applied_to.all()
+    else:
+        applied_applications = []
+    return render(request, "placement/show_company.html", {
+            'companies': all_companies,
+            'applied_applications': applied_applications,
+        })
+
 @login_required
 def show_description(request, company_id):
     # print(company_id)
@@ -44,7 +57,7 @@ def apply_job(request, company_id):
         messages.success(request, 'You have applied to ' + comp.company_name + ' job profile')   
 
     all_companies = company.objects.all()
-    return render(request, "placement/show_company.html", {'companies': all_companies})
+    return redirect('show_company')
 
 @login_required
 def your_app(request):
