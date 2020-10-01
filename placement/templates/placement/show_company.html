@@ -32,6 +32,7 @@ tr:nth-child(even) {
             <th>Job Profile</th>
             <th>Location</th>
             <th>Category</th>
+            <th>Application Status</th>
         </tr>
     {% for company in companies %}
             <tr>
@@ -39,6 +40,15 @@ tr:nth-child(even) {
                 <th>{{company.job_profile}}</th>
                 <th>{{company.company_location}}</th>
                 <th>{{company.company_category}}</th>
+                {% if user.is_authenticated %}
+                  {% if company in applied_applications %}
+                    <th>Already Applied</th>
+                  {% else %}
+                    <th><a href="{% url 'apply_job' company.id %}">Apply</a> / <a href="{% url 'show_description' company.id %}">Details</a></th>
+                  {% endif %}
+                {% else %}
+                  <th><a href="{% url 'apply_job' company.id %}">Apply</a> / <a href="{% url 'show_description' company.id %}">Details</a></th>
+                {% endif %}
             </tr>
 
     {% endfor %}
