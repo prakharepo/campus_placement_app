@@ -34,9 +34,19 @@ class ProfileUpdateForm(forms.ModelForm):
     cgpa = forms.CharField(label='CGPA', max_length=20)
     degree = forms.CharField(label='Degree', max_length=20)
     stream = forms.CharField(label='Stream', max_length=20)
+    full_name = forms.CharField(label='full_name', max_length=100)
+    doa = forms.CharField(label='doa', max_length=20)
+    gender = forms.CharField(label='gender', max_length=8)
+    category = forms.CharField(label='category', max_length=15)
+    Cnumber = forms.CharField(label='Cnumber.', max_length=20)
+    Email = forms.CharField(label='email', max_length=20)
+    PEmail = forms.CharField(label='pemail', max_length=20)
+    Paddress = forms.CharField(label='paddress', max_length=20)
+    Caddress = forms.CharField(label='caddress', max_length=20)
+
     class Meta:
         model = Profile
-        fields = ['first_name','last_name','id_no','phone_no','cgpa','degree','stream','image']
+        fields = ['first_name','last_name','id_no','phone_no','cgpa','degree','stream','image','full_name', 'doa', 'gender', 'category', 'Cnumber', 'Email', 'PEmail', 'Paddress', 'Caddress']
 
 class ProfileViewForm(forms.ModelForm):
     placed_in = forms.CharField(label='Job Offered In...(you can not change this field)', max_length=20)

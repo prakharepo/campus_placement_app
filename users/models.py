@@ -13,6 +13,15 @@ class Profile(models.Model):
     degree = models.CharField(max_length=20)
     stream = models.CharField(max_length=20)
     placed_in = models.CharField(default='NoOffer', max_length=20)
+    full_name = models.CharField(max_length=100)
+    doa = models.CharField(max_length=20)
+    gender = models.CharField(max_length=8)
+    category = models.CharField(max_length=15)
+    Cnumber = models.CharField(max_length=20)
+    Email = models.CharField(max_length=20)
+    PEmail = models.CharField(max_length=20)
+    Paddress = models.CharField(max_length=20)
+    Caddress = models.CharField(max_length=20)
 
     def __str__(self):
         return f'{self.user.username} Profile'

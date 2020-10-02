@@ -22,7 +22,119 @@
           <fieldset class="form-group">
               <legend class="border-bottom mb-4">Profile Info</legend>
               {{ u_form|crispy }}
-              {{ p_form|crispy }}
+              <div id="div_id_first_name" class="form-group">
+                  <label for="id_first_name" class="requiredField"> First name<span class="asteriskField">*</span> </label>
+                  <div class="">
+                    <input type="text" name="first_name" value="{{p_form.first_name.value}}" maxlength="20" class="textinput textInput form-control" required id="id_first_name"/>
+                  </div>
+              </div>
+              <div id="div_id_last_name" class="form-group">
+                  <label for="id_last_name" class="requiredField"> Last name<span class="asteriskField">*</span> </label>
+                  <div class="">
+                    <input type="text" name="last_name" value="{{p_form.last_name.value}}" maxlength="20" class="textinput textInput form-control" required id="id_last_name" />
+                  </div>
+              </div>
+              <div id="div_id_id_no" class="form-group">
+                  <label for="id_id_no" class="requiredField"> ID No.<span class="asteriskField">*</span> </label>
+                  <div class="">
+                    <input type="text" name="id_no" value="{{p_form.id_no.value}}" maxlength="20" class="textinput textInput form-control" required id="id_id_no" />
+                  </div>
+              </div>
+              <div id="div_id_phone_no" class="form-group">
+                  <label for="id_phone_no" class="requiredField"> Phone No.<span class="asteriskField">*</span> </label>
+                  <div class="">
+                    <input type="text" name="phone_no" value="{{p_form.phone_no.value}}" maxlength="20" class="textinput textInput form-control" required id="id_phone_no" />
+                  </div>
+              </div>
+              <div id="div_id_cgpa" class="form-group">
+                  <label for="id_cgpa" class="requiredField"> CGPA<span class="asteriskField">*</span> </label>
+                  <div class="">
+                    <input type="text" name="cgpa" value="{{p_form.cgpa.value}}" maxlength="20" class="textinput textInput form-control" required id="id_cgpa" />
+                  </div>
+              </div>
+              <div id="div_id_degree" class="form-group">
+                  <label for="id_degree" class="requiredField"> Degree<span class="asteriskField">*</span> </label>
+                  <div class="">
+                    <input type="text" name="degree" value="{{p_form.degree.value}}" maxlength="20" class="textinput textInput form-control" required id="id_degree" />
+                  </div>
+              </div>
+              <div id="div_id_stream" class="form-group">
+                  <label for="id_stream" class="requiredField"> Stream<span class="asteriskField">*</span> </label>
+                  <div class="">
+                    <input type="text" name="stream" value="{{p_form.stream.value}}" maxlength="20" class="textinput textInput form-control" required id="id_stream" />
+                  </div>
+              </div>
+              <div id="div_id_image" class="form-group">
+                  <label for="id_image" class="requiredField"> Image<span class="asteriskField">*</span> </label>
+                  <div class="">
+                      Currently: <a href="/media/default.jpg">default.jpg</a><br />
+                      Change:
+                      <input type="file" name="image" accept="image/*" class="clearablefileinput form-control-file" id="id_image" />
+                  </div>
+              </div>
+              <legend class="border-bottom mb-4">Details</legend>
+              <div id="div_id_full_name" class="form-group">
+                  <label for="id_full_name" class="requiredField">Full Name<span class="asteriskField">*</span> </label>
+                  <div class="">
+                    <input type="text" name="full_name" value="{{p_form.full_name.value}}" maxlength="100" class="textinput textInput form-control" required id="id_full_name" />
+                  </div>
+              </div>
+
+              <legend class="border-bottom mb-4">About</legend>
+              <div id="div_id_doa" class="form-group">
+                  <label for="id_doa" class="requiredField"> Date of Birth<span class="asteriskField">*</span> </label>
+                  <div class="">
+                    <input type="text" name="doa" value="{{p_form.doa.value}}" maxlength="20" class="textinput textInput form-control" required id="id_doa" />
+                  </div>
+              </div>
+              <div id="div_id_gender" class="form-group">
+                  <label for="id_gender" class="requiredField"> Gender<span class="asteriskField">*</span> </label>
+                  <div class="">
+                    <input type="text" name="gender" value="{{p_form.gender.value}}" maxlength="8" class="textinput textInput form-control" required id="id_gender" />
+                  </div>
+              </div>
+              <div id="div_id_category" class="form-group">
+                  <label for="id_category" class="requiredField"> Category<span class="asteriskField">*</span> </label>
+                  <div class="">
+                    <input type="text" name="category" value="{{p_form.category.value}}" maxlength="15" class="textinput textInput form-control" required id="id_category" />
+                  </div>
+              </div>
+
+
+              <legend class="border-bottom mb-4">Contact Details</legend>
+              <div id="div_id_Cnumber" class="form-group">
+                  <label for="id_Cnumber" class="requiredField"> Contact Number<span class="asteriskField">*</span> </label>
+                  <div class="">
+                    <input type="text" name="Cnumber" value="{{p_form.Cnumber.value}}" maxlength="20" class="textinput textInput form-control" required id="id_Cnumber"/>
+                  </div>
+              </div>
+              <div id="div_id_Email" class="form-group">
+                  <label for="id_Email" class="requiredField"> Email<span class="asteriskField">*</span> </label>
+                  <div class="">
+                    <input type="text" name="Email" value="{{p_form.Email.value}}" maxlength="20" class="textinput textInput form-control" required id="id_Email" />
+                  </div>
+              </div>
+              <div id="div_id_PEmail" class="form-group">
+                  <label for="id_PEmail" class="requiredField"> Personal Email<span class="asteriskField">*</span> </label>
+                  <div class="">
+                    <input type="text" name="PEmail" value="{{p_form.PEmail.value}}" maxlength="20" class="textinput textInput form-control" required id="id_PEmail" />
+                  </div>
+              </div>
+
+              <legend class="border-bottom mb-4">Address</legend>
+              <div id="div_id_Paddress" class="form-group">
+                  <label for="id_Paddress" class="requiredField"> Permanent Address<span class="asteriskField">*</span> </label>
+                  <div class="">
+                    <input type="text" name="Paddress" value="{{p_form.Paddress.value}}" maxlength="20" class="textinput textInput form-control" required id="id_Paddress" />
+                  </div>
+              </div>
+              <div id="div_id_Caddress" class="form-group">
+                  <label for="id_Caddress" class="requiredField"> Current Aaddress<span class="asteriskField">*</span> </label>
+                  <div class="">
+                    <input type="text" name="Caddress" value="{{p_form.Caddress.value}}" maxlength="20" class="textinput textInput form-control" required id="id_Caddress" />
+                  </div>
+              </div>
+
               {{ v_form|crispy }}
           </fieldset>
           <div class="form-group">
