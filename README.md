@@ -39,7 +39,6 @@
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
 * [License](#license)
-* [Contact](#contact)
 
 
 
@@ -106,12 +105,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 
 
-<!-- CONTACT -->
-## Contact
-
-Prakhar Gupta - prakhar19jan@gmail.com
-
-Project Link: [https://github.com/prakharepo/campus_placement_app/](https://github.com/prakharepo/campus_placement_app/)
 
 
 
