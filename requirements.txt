@@ -18,3 +18,4 @@ six==1.15.0
 sqlparse==0.3.1
 toml==0.10.1
 wrapt==1.12.1
+django-allauth==0.42.0
